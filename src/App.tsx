@@ -747,7 +747,7 @@ export function App() {
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <form className="space-y-5" onSubmit={handleSubmit}>
+                    <form className="space-y-5 text-slate-800" onSubmit={handleSubmit}>
                       <div className="space-y-2">
                         <Label
                           htmlFor="name"
