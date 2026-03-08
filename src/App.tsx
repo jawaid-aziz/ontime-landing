@@ -48,44 +48,57 @@ export function App() {
 
   const [loading, setLoading] = useState(false)
 
-  const handleSubmit = async (e: any) => {
-    e.preventDefault()
+const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault()
 
-    setLoading(true)
+  setLoading(true)
 
-    const formData = new FormData(e.target)
+  try {
+    const formData = new FormData(e.currentTarget)
 
     const data = {
       name: formData.get("name"),
       company: formData.get("company"),
       email: formData.get("email"),
-      message: formData.get("message"),
+      message: formData.get("message")
     }
 
-    try {
-      const res = await fetch("/api/send-email", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
+    const res = await fetch("/api/send-email", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    })
+
+    if (!res.ok) {
+      throw new Error("Server error")
+    }
+
+    const result = await res.json()
+
+    if (result.success) {
+
+      toast.success("Request sent successfully", {
+        description: "We'll contact you shortly."
       })
 
-      const result = await res.json()
-
-      if (result.success) {
-        toast.success("Request sent successfully", {
-          description: "We'll contact you shortly.",
-        })
-      }
       e.currentTarget.reset()
-    } catch (err) {
-      toast.error("Something went wrong", {
-        description: "Please try again later.",
-      })
+
+    } else {
+      throw new Error("Email failed")
     }
+
+  } catch (err) {
+
+    toast.error("Something went wrong", {
+      description: "Please try again."
+    })
+
+  } finally {
     setLoading(false)
   }
+}
 
   const navLinks = [
     { name: "Features", href: "#features" },
