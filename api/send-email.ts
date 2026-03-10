@@ -12,7 +12,7 @@ export default async function handler(req: any, res: any) {
 
     const { name, company, email, message } = req.body;
 
-    if (!name || !email || !message) {
+    if (!name || !company || !email || !message) {
     return res.status(400).json({ error: "Missing required fields" })
 }
 

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -37,6 +37,7 @@ import { toast } from "sonner"
 
 export function App() {
   const [isScrolled, setIsScrolled] = useState(false)
+  const formRef = useRef<HTMLFormElement>(null)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -83,18 +84,14 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         description: "We'll contact you shortly."
       })
 
-      e.currentTarget.reset()
+      formRef.current?.reset()
 
     } else {
       throw new Error("Email failed")
     }
 
   } catch (err) {
-
-    toast.error("Something went wrong", {
-      description: "Please try again."
-    })
-
+    console.log(err)
   } finally {
     setLoading(false)
   }
@@ -760,7 +757,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <form className="space-y-5 text-slate-800" onSubmit={handleSubmit}>
+                    <form className="space-y-5 text-slate-800" ref={formRef} onSubmit={handleSubmit}>
                       <div className="space-y-2">
                         <Label
                           htmlFor="name"
