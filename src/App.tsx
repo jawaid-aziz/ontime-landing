@@ -558,10 +558,10 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
                     </ul>
                   </CardContent>
                   <a href="#demo">
-                    <CardFooter>
+                    <CardFooter className="bg-blue-400">
                       <Button
                         variant="outline"
-                        className="h-11 w-full cursor-pointer rounded-full border-blue-200 font-semibold text-blue-700 hover:bg-blue-50"
+                        className="h-11 w-full cursor-pointer rounded-full border border-blue-800 font-semibold text-blue-800 hover:bg-blue-50"
                       >
                         Get Starter
                       </Button>
@@ -657,10 +657,10 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
                     </ul>
                   </CardContent>
                   <a href="#demo">
-                    <CardFooter>
+                    <CardFooter className="bg-blue-400">
                       <Button
                         variant="outline"
-                        className="h-11 w-full cursor-pointer rounded-full border-blue-200 font-semibold text-blue-700 hover:bg-blue-50"
+                        className="h-11 w-full cursor-pointer rounded-full border border-blue-800 font-semibold text-blue-800 hover:bg-blue-50"
                       >
                         Contact Sales
                       </Button>
